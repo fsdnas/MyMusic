@@ -1,8 +1,11 @@
 package com.mymusic.service;
 
+import com.mymusic.exceptions.AlbumNotFoundException;
 import com.mymusic.exceptions.ArtistNotFoundException;
 import com.mymusic.model.Artist;
 import com.mymusic.repository.IArtistRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +13,7 @@ import java.util.List;
 @Service
 public class ArtistServiceImpl implements IArtistService {
     private final IArtistRepository artistRepository;
+    private final Logger logger = LoggerFactory.getLogger(ArtistNotFoundException.class);
 
     public ArtistServiceImpl(IArtistRepository artistRepository) {
         this.artistRepository = artistRepository;
@@ -32,21 +36,34 @@ public class ArtistServiceImpl implements IArtistService {
 
     @Override
     public Artist getByArtistId(int artistId) throws ArtistNotFoundException {
-        return null;
+        return artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException("Artist not found"));
     }
 
     @Override
     public List<Artist> getAllArtists() {
-        return null;
+        return artistRepository.findAll();
+
     }
 
     @Override
     public List<Artist> getByArtistName(String name) throws ArtistNotFoundException {
-        return null;
+        List<Artist> artist = artistRepository.findByArtistName(name);
+        if (artist.isEmpty()) {
+            logger.warn("throws AlbumNotFoundException");
+            logger.error("Album not found");
+            throw new AlbumNotFoundException("Invalid Data");
+        }
+        return artist;
     }
 
     @Override
     public List<Artist> getByArtistRank(int rank) throws ArtistNotFoundException {
-        return null;
+        List<Artist> artist = artistRepository.findByArtistRank(rank);
+        if (artist.isEmpty()) {
+            logger.warn("throws AlbumNotFoundException");
+            logger.error("Album not found");
+            throw new AlbumNotFoundException("Invalid Data");
+        }
+        return artist;
     }
 }

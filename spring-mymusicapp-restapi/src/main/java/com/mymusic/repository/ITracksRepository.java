@@ -15,7 +15,7 @@ public interface ITracksRepository extends JpaRepository<Tracks, Long> {
     @Query("from Tracks t where t.trackName LIKE %?1%")
     Tracks findByTrackName(String trackName) throws TrackNotFoundException;
 
-    @Query("from Tracks t inner join t.artists where artistName LIKE %?1%")
+    @Query("from Tracks t inner join t.artists a where a.artistName LIKE %?1%")
     List<Tracks> findByArtistName(String artistName) throws TrackNotFoundException;
 
     List<Tracks> findByComposer(String composer) throws TrackNotFoundException;
@@ -23,7 +23,6 @@ public interface ITracksRepository extends JpaRepository<Tracks, Long> {
     @Query("from Tracks t where t.releaseDate = ?1")
     List<Tracks> findByReleaseDate(LocalDate releaseDate) throws TrackNotFoundException;
 
-    //    @Query(value = "select * from Tracks t where t.release_date >= :startdate and t.release_date <= :enddate", nativeQuery = true)
     @Query("from Tracks t where t.releaseDate >= ?1 and t.releaseDate <= ?2")
     List<Tracks> findByreleaseDateBetween(LocalDate startDate, LocalDate endDate) throws TrackNotFoundException;
 

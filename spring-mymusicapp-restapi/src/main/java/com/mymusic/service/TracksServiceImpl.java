@@ -56,6 +56,8 @@ public class TracksServiceImpl implements ITracksService {
     public List<Tracks> getByArtistName(String artistName) throws TrackNotFoundException {
         List<Tracks> tracks = tracksRepository.findByArtistName(artistName);
         if (tracks.size() == 0) {
+            logger.warn("throws TrackNotFoundException");
+            logger.error("Tracks not found");
             throw new TrackNotFoundException("No tracks found");
         }
         return tracks;
@@ -65,6 +67,8 @@ public class TracksServiceImpl implements ITracksService {
     public List<Tracks> getByComposer(String composer) throws TrackNotFoundException {
         List<Tracks> tracks = tracksRepository.findByComposer(composer);
         if (tracks.size() == 0) {
+            logger.warn("throws TrackNotFoundException");
+            logger.error("Tracks not found");
             throw new TrackNotFoundException("No tracks found");
         }
         return tracks;
@@ -76,6 +80,8 @@ public class TracksServiceImpl implements ITracksService {
         LocalDate releaseDate = LocalDate.parse(dateReleased, formatter);
         List<Tracks> tracks = tracksRepository.findByReleaseDate(releaseDate);
         if (tracks.size() == 0) {
+            logger.warn("throws TrackNotFoundException");
+            logger.error("Tracks not found");
             throw new TrackNotFoundException("No tracks found");
         }
         return tracks;
@@ -89,6 +95,8 @@ public class TracksServiceImpl implements ITracksService {
 
         List<Tracks> tracks = tracksRepository.findByreleaseDateBetween(startDate, endDate);
         if (tracks.size() == 0) {
+            logger.warn("throws TrackNotFoundException");
+            logger.error("Tracks not found");
             throw new TrackNotFoundException("No tracks found");
         }
         return tracks;
@@ -98,6 +106,8 @@ public class TracksServiceImpl implements ITracksService {
     public List<Tracks> getByComposerAndArtist(String composer, String artist) throws TrackNotFoundException {
         List<Tracks> tracks = tracksRepository.findByComposerAndArtists(composer, artist);
         if (tracks.size() == 0) {
+            logger.warn("throws TrackNotFoundException");
+            logger.error("Tracks not found");
             throw new TrackNotFoundException("No tracks found");
         }
         return tracks;

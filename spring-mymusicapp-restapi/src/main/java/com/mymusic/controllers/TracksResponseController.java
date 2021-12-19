@@ -19,7 +19,7 @@ import java.util.List;
 public class TracksResponseController {
 
     private final Logger logger = LoggerFactory.getLogger(TracksResponseController.class);
-    private ITracksService trackService;
+    private final ITracksService trackService;
 
     public TracksResponseController(ITracksService trackService) {
         this.trackService = trackService;

@@ -1,10 +1,13 @@
 package com.mymusic.service;
 
+import com.mymusic.controllers.AlbumResponseController;
 import com.mymusic.exceptions.AlbumNotFoundException;
 import com.mymusic.model.Album;
 import com.mymusic.model.Label;
 import com.mymusic.model.Language;
 import com.mymusic.repository.IAlbumRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +16,7 @@ import java.util.List;
 public class AlbumServiceImpl implements IAlbumService {
 
     private final IAlbumRepository albumRepository;
+    private final Logger logger = LoggerFactory.getLogger(AlbumResponseController.class);
 
     public AlbumServiceImpl(IAlbumRepository albumRepository) {
         this.albumRepository = albumRepository;
@@ -45,31 +49,67 @@ public class AlbumServiceImpl implements IAlbumService {
 
     @Override
     public List<Album> getByAlbumName(String albumName) throws AlbumNotFoundException {
-        return albumRepository.findByAlbumName(albumName);
+        List<Album> album = albumRepository.findByAlbumName(albumName);
+        if (album.isEmpty()) {
+            logger.warn("throws AlbumNotFoundException");
+            logger.error("Album not found");
+            throw new AlbumNotFoundException("Invalid Data");
+        }
+        return album;
     }
 
     @Override
     public List<Album> getByLanguage(String language) throws AlbumNotFoundException {
-        return albumRepository.findByLanguage(Language.valueOf(language));
+        List<Album> album = albumRepository.findByLanguage(Language.valueOf(language));
+        if (album.isEmpty()) {
+            logger.warn("throws AlbumNotFoundException");
+            logger.error("Album not found");
+            throw new AlbumNotFoundException("Invalid Data");
+        }
+        return album;
     }
 
     @Override
     public List<Album> getByLabel(String label) throws AlbumNotFoundException {
-        return albumRepository.findByLabel(Label.valueOf(label));
+        List<Album> album = albumRepository.findByLabel(Label.valueOf(label));
+        if (album.isEmpty()) {
+            logger.warn("throws AlbumNotFoundException");
+            logger.error("Album not found");
+            throw new AlbumNotFoundException("Invalid Data");
+        }
+        return album;
     }
 
     @Override
     public List<Album> getByGenre(String genre) throws AlbumNotFoundException {
-        return albumRepository.findByGenre(genre);
+        List<Album> album = albumRepository.findByGenre(genre);
+        if (album.isEmpty()) {
+            logger.warn("throws AlbumNotFoundException");
+            logger.error("Album not found");
+            throw new AlbumNotFoundException("Invalid Data");
+        }
+        return album;
     }
 
     @Override
     public List<Album> getByAlbumAndArtist(String albumName, String artistName) throws AlbumNotFoundException {
-        return albumRepository.findByAlbumAndArtist(albumName, artistName);
+        List<Album> album = albumRepository.findByAlbumAndArtist(albumName, artistName);
+        if (album.isEmpty()) {
+            logger.warn("throws AlbumNotFoundException");
+            logger.error("Album not found");
+            throw new AlbumNotFoundException("Invalid Data");
+        }
+        return album;
     }
 
     @Override
     public List<Album> getByAlbumNameContaining(String albumName) throws AlbumNotFoundException {
-        return albumRepository.findByAlbumNameContaining(albumName);
+        List<Album> album = albumRepository.findByAlbumNameContaining(albumName);
+        if (album.isEmpty()) {
+            logger.warn("throws AlbumNotFoundException");
+            logger.error("Album not found");
+            throw new AlbumNotFoundException("Invalid Data");
+        }
+        return album;
     }
 }
