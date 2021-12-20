@@ -1,6 +1,6 @@
 package com.mymusic.service;
 
-import com.mymusic.controllers.TracksResponseController;
+import com.mymusic.controllers.TracksController;
 import com.mymusic.exceptions.TrackNotFoundException;
 import com.mymusic.model.Tracks;
 import com.mymusic.repository.ITracksRepository;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 public class TracksServiceImpl implements ITracksService {
-    private final Logger logger = LoggerFactory.getLogger(TracksResponseController.class);
+    private final Logger logger = LoggerFactory.getLogger(TracksController.class);
     private final ITracksRepository tracksRepository;
 
     public TracksServiceImpl(ITracksRepository tracksRepository) {

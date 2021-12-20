@@ -16,8 +16,6 @@ public interface IArtistService {
 
     List<Artist> getAllArtists();
 
-    List<Artist> getByArtistName(String name) throws ArtistNotFoundException;
-
     List<Artist> getByArtistRank(int rank) throws ArtistNotFoundException;
 
 

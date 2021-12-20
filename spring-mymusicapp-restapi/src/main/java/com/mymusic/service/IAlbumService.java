@@ -16,8 +16,6 @@ public interface IAlbumService {
 
     List<Album> getAll();
 
-    List<Album> getByAlbumName(String albumName) throws AlbumNotFoundException;
-
     List<Album> getByLanguage(String language) throws AlbumNotFoundException;
 
     List<Album> getByLabel(String label) throws AlbumNotFoundException;

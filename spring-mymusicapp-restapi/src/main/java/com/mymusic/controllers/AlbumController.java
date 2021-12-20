@@ -14,12 +14,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/album-response-api")
-public class AlbumResponseController {
+public class AlbumController {
 
     private final IAlbumService albumService;
-    private final Logger logger = LoggerFactory.getLogger(AlbumResponseController.class);
+    private final Logger logger = LoggerFactory.getLogger(AlbumController.class);
 
-    public AlbumResponseController(IAlbumService albumService) {
+    public AlbumController(IAlbumService albumService) {
         this.albumService = albumService;
     }
 
@@ -33,7 +33,7 @@ public class AlbumResponseController {
     }
 
     @PutMapping("/album/update")
-    ResponseEntity<Void> updateAlbum(@RequestParam Album album) {
+    ResponseEntity<Void> updateAlbum(@RequestBody Album album) {
         HttpHeaders headers = new HttpHeaders();
         albumService.updateAlbum(album);
         headers.add("desc", "Album updated successfully");
@@ -67,14 +67,7 @@ public class AlbumResponseController {
         return ResponseEntity.ok().headers(headers).body(albumList);
     }
 
-    @GetMapping("/album/albumName/{albumName}")
-    ResponseEntity<List<Album>> getByAlbumName(@PathVariable("albumName") String albumName) {
-        HttpHeaders headers = new HttpHeaders();
-        List<Album> albumList = albumService.getByAlbumName(albumName);
-        headers.add("desc", "Albums found successfully");
-        headers.add("info", "Album Details");
-        return ResponseEntity.ok().headers(headers).body(albumList);
-    }
+
 
     @GetMapping("/album/albumNameLike/{albumNameLike}")
     ResponseEntity<List<Album>> getByAlbumNameContaining(@PathVariable("albumNameLike") String albumNameLike) {

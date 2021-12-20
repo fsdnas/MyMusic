@@ -11,7 +11,5 @@ import java.util.List;
 @Repository
 public interface IArtistRepository extends JpaRepository<Artist, Integer> {
 
-    List<Artist> findByArtistName(String name) throws ArtistNotFoundException;
-
     List<Artist> findByArtistRank(int rank) throws ArtistNotFoundException;
 }

@@ -45,16 +45,7 @@ public class ArtistServiceImpl implements IArtistService {
 
     }
 
-    @Override
-    public List<Artist> getByArtistName(String name) throws ArtistNotFoundException {
-        List<Artist> artist = artistRepository.findByArtistName(name);
-        if (artist.isEmpty()) {
-            logger.warn("throws AlbumNotFoundException");
-            logger.error("Album not found");
-            throw new AlbumNotFoundException("Invalid Data");
-        }
-        return artist;
-    }
+
 
     @Override
     public List<Artist> getByArtistRank(int rank) throws ArtistNotFoundException {

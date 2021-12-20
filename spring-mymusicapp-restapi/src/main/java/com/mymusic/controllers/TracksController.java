@@ -16,12 +16,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tracks-response-api")
-public class TracksResponseController {
+public class TracksController {
 
-    private final Logger logger = LoggerFactory.getLogger(TracksResponseController.class);
+    private final Logger logger = LoggerFactory.getLogger(TracksController.class);
     private final ITracksService trackService;
 
-    public TracksResponseController(ITracksService trackService) {
+    public TracksController(ITracksService trackService) {
         this.trackService = trackService;
     }
 

@@ -1,6 +1,6 @@
 package com.mymusic.service;
 
-import com.mymusic.controllers.AlbumResponseController;
+import com.mymusic.controllers.AlbumController;
 import com.mymusic.exceptions.AlbumNotFoundException;
 import com.mymusic.model.Album;
 import com.mymusic.model.Label;
@@ -16,7 +16,7 @@ import java.util.List;
 public class AlbumServiceImpl implements IAlbumService {
 
     private final IAlbumRepository albumRepository;
-    private final Logger logger = LoggerFactory.getLogger(AlbumResponseController.class);
+    private final Logger logger = LoggerFactory.getLogger(AlbumController.class);
 
     public AlbumServiceImpl(IAlbumRepository albumRepository) {
         this.albumRepository = albumRepository;
@@ -47,16 +47,6 @@ public class AlbumServiceImpl implements IAlbumService {
         return albumRepository.findAll();
     }
 
-    @Override
-    public List<Album> getByAlbumName(String albumName) throws AlbumNotFoundException {
-        List<Album> album = albumRepository.findByAlbumName(albumName);
-        if (album.isEmpty()) {
-            logger.warn("throws AlbumNotFoundException");
-            logger.error("Album not found");
-            throw new AlbumNotFoundException("Invalid Data");
-        }
-        return album;
-    }
 
     @Override
     public List<Album> getByLanguage(String language) throws AlbumNotFoundException {

@@ -14,16 +14,15 @@ import java.util.List;
 @Repository
 public interface IAlbumRepository extends JpaRepository<Album, Integer> {
 
-    List<Album> findByAlbumName(String albumName) throws AlbumNotFoundException;
 
     List<Album> findByLanguage(Language language) throws AlbumNotFoundException;
 
     List<Album> findByLabel(Label label) throws AlbumNotFoundException;
 
-    @Query("from Album a inner join a.genre g where g.genreName = ?1")
+    @Query("from Album a inner join a.genre g where g.genreName LIKE %?1%")
     List<Album> findByGenre(String genre) throws AlbumNotFoundException;
 
-    @Query("from Album a inner join a.tracks t inner join t.artists ar where ar.artistName = ?1 and a.albumName = ?2")
+    @Query("from Album a inner join a.tracks t inner join t.artists ar where ar.artistName LIKE %?1% and a.albumName LIKE %?2%")
     List<Album> findByAlbumAndArtist(String albumName, String artistName) throws AlbumNotFoundException;
 
     @Query("from Album a where a.albumName LIKE %?1%")
